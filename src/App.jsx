@@ -195,6 +195,12 @@ function TraitBar({ label, value }) {
 function ProductCard({ item, idx }) {
   const [evOpen, setEvOpen] = useState(false);
     const ev = { A: ["#dcfce7","#15803d","AAA"], B: ["#dbeafe","#1d4ed8","BBB"], C: ["#fef9c3","#92400e","CCC"] }[item.ev] || ["#f0f0f0","#6b7280","---"];
+          {evOpen && <div style={{ marginTop: 5, fontSize: 10, color: ev[1], background: ev[0], borderRadius: 6, padding: "4px 8px", lineHeight: 1.6 }}>{item.evNote}</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
 export default function App() {
   const [tab, setTab] = useState("analyse");
   const [phase, setPhase] = useState("upload");
