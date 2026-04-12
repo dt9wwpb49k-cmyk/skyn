@@ -133,25 +133,18 @@ const PRODUKTE = {
     }
   }
 };
-
-const PROFILE_INFO = {
-  combination: { type: "Mischhaut", emoji: "⚖️", score: 72, traits: { Feuchtigkeit: 45, Talgproduktion: 65, Empfindlichkeit: 30, Elastizität: 70 }, concerns: ["T-Zone Glanz", "Vergrößerte Poren", "Leichte Unreinheiten"], summary: "Die T-Zone neigt zu erhöhter Talgproduktion, während die Wangen normal bis leicht trocken sind." },
-  dry: { type: "Trockene Haut", emoji: "🌿", score: 58, traits: { Feuchtigkeit: 22, Talgproduktion: 18, Empfindlichkeit: 60, Elastizität: 45 }, concerns: ["Trockenheitsgefühl", "Spannungsgefühl", "Feine Linien"], summary: "Deine Haut produziert wenig Talg und verliert schnell Feuchtigkeit. Priorität: Barriere stärken." },
-  oily: { type: "Fettige Haut", emoji: "💧", score: 65, traits: { Feuchtigkeit: 68, Talgproduktion: 88, Empfindlichkeit: 25, Elastizität: 80 }, concerns: ["Übermäßiger Glanz", "Mitesser", "Unreinheiten"], summary: "Deine Haut produziert viel Talg. Mit BHA, Niacinamid und Retinol bekommst du Poren unter Kontrolle." },
-};
 async function analyseHaut(base64) {
   const body = {
     model: "claude-sonnet-4-20250514",
-    max_tokens: 200,
+    max_tokens: 300,
     messages: [{
       role: "user",
       content: [
         { type: "image", source: { type: "base64", media_type: "image/jpeg", data: base64 } },
-        { type: "text", text: `Schau dir dieses Bild an und antworte NUR mit JSON.\n\nWenn KEIN Gesicht sichtbar: {"ok":false,"issue":"Kein Gesicht erkannt — bitte Selfie aufnehmen"}\nWenn von unten: {"ok":false,"issue":"Kamera zu weit unten — auf Augenhöhe halten"}\nWenn von oben: {"ok":false,"issue":"Kamera zu weit oben — auf Augenhöhe halten"}\nWenn zu dunkel/unscharf: {"ok":false,"issue":"Zu dunkel oder unscharf"}\nWenn normales Selfie: {"ok":true,"skinType":"combination"} oder "dry" oder "oily"\n\nNur JSON.` }
+        { type: "text", text: `Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON.\n\nWenn KEIN Gesicht: {"ok":false,"issue":"Kein Gesicht erkannt — bitte Selfie aufnehmen"}\nWenn von unten/oben/dunkel/unscharf: {"ok":false,"issue":"[Hinweis]"}\n\nWenn normales Selfie:\n{"ok":true,"skinType":"combination","score":69,"scores":{"Feuchtigkeit":42,"Talgproduktion":68,"Empfindlichkeit":35,"Elastizität":71},"concerns":["T-Zone Glanz","Vergrößerte Poren"],"summary":"Kurze individuelle Beschreibung auf Deutsch."}\n\nskinType: combination/dry/oily\nAlle Scores 0-100 realistisch basierend auf dem Foto.\nNur JSON.` }
       ]
     }]
   };
-
   const res = await fetch(`${BACKEND}/api/analyse`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -160,7 +153,7 @@ async function analyseHaut(base64) {
   const data = await res.json();
   if (data.type === "error") throw new Error(data.error?.type);
   const text = data.content?.[0]?.text || "";
-  const match = text.match(/\{[^{}]*\}/);
+  const match = text.match(/\{[\s\S]*\}/);
   if (!match) throw new Error("Keine Antwort");
   return JSON.parse(match[0]);
 }
@@ -201,42 +194,13 @@ function TraitBar({ label, value }) {
 
 function ProductCard({ item, idx }) {
   const [evOpen, setEvOpen] = useState(false);
-  const ev = { A: ["#dcfce7","#15803d","★★★"], B: ["#dbeafe","#1d4ed8","★★☆"], C: ["#fef9c3","#92400e","★☆☆"] }[item.ev] || ["#f0f0f0","#6b7280","★☆☆"];
-  return (
-    <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 8, border: item.spf ? "1.5px solid #fde68a" : item.highlight ? "1.5px solid #bfdbfe" : "1px solid #f0f0f0" }}>
-      <div style={{ display: "flex", gap: 10 }}>
-        <div style={{ width: 22, height: 22, borderRadius: "50%", background: item.spf ? "#fef9c3" : "#f0f7ff", color: item.spf ? "#92400e" : "#3b82f6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, flexShrink: 0, marginTop: 1 }}>
-          {item.spf ? "☀" : idx + 1}
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 9, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.07em" }}>{item.step}</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#111827" }}>{item.name}</div>
-              <div style={{ fontSize: 11, color: "#6b7280" }}>{item.brand}</div>
-            </div>
-            <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 8 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#111827" }}>{item.price}</div>
-              <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, background: "#111827", color: "white", padding: "3px 9px", borderRadius: 99, textDecoration: "none", fontWeight: 600, display: "inline-block", marginTop: 3 }}>Kaufen →</a>
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: 4, marginTop: 6, flexWrap: "wrap" }}>
-            {item.freq && <span style={{ fontSize: 9, background: "#fff7ed", color: "#c2410c", padding: "2px 6px", borderRadius: 99, fontWeight: 600 }}>⚠ {item.freq}</span>}
-            <button onClick={() => setEvOpen(v => !v)} style={{ fontSize: 9, background: ev[0], color: ev[1], padding: "2px 6px", borderRadius: 99, border: "none", cursor: "pointer", fontWeight: 600 }}>
-              {ev[2]} Evidenz {item.ev} {evOpen ? "▲" : "▼"}
-            </button>
-          </div>
-          {evOpen && <div style={{ marginTop: 5, fontSize: 10, color: ev[1], background: ev[0], borderRadius: 6, padding: "4px 8px", lineHeight: 1.6 }}>{item.evNote}</div>}
-        </div>
-      </div>
-    </div>
-  );
-}
+  const ev = { A: ["#dcfce7","#15803d","★★★"], B: ["#dbeafe","#1d​​​​​​​​​​​​​​​​
 export default function App() {
   const [tab, setTab] = useState("analyse");
   const [phase, setPhase] = useState("upload");
   const [photoUrl, setPhotoUrl] = useState(null);
   const [skinType, setSkinType] = useState(null);
+  const [skinData, setSkinData] = useState(null);
   const [issue, setIssue] = useState(null);
   const [budget, setBudget] = useState("drogerie");
   const [timeOfDay, setTimeOfDay] = useState("morning");
@@ -245,7 +209,7 @@ export default function App() {
   const fileRef = useRef();
   const STEPS = ["Foto wird geprüft...", "Hauttyp wird bestimmt...", "Routine wird erstellt..."];
 
-  const reset = () => { setPhase("upload"); setPhotoUrl(null); setSkinType(null); setIssue(null); setLoadingStep(0); };
+  const reset = () => { setPhase("upload"); setPhotoUrl(null); setSkinType(null); setSkinData(null); setIssue(null); setLoadingStep(0); };
 
   const handleFile = useCallback(async (file) => {
     if (!file) return;
@@ -261,10 +225,10 @@ export default function App() {
       if (!result.ok) { setIssue(result.issue || "Foto nicht geeignet"); setPhase("rejected"); return; }
       const st = ["combination","dry","oily"].includes(result.skinType) ? result.skinType : "combination";
       setSkinType(st);
+      setSkinData(result);
       setTimeout(() => {
         setPhase("result");
-        const info = PROFILE_INFO[st];
-        setHistory(prev => [{ url, type: info.type, score: info.score, date: new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "short", year: "numeric" }) }, ...prev]);
+        setHistory(prev => [{ url, type: result.skinType === "combination" ? "Mischhaut" : result.skinType === "dry" ? "Trockene Haut" : "Fettige Haut", score: result.score || 70, date: new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "short", year: "numeric" }) }, ...prev]);
       }, 400);
     } catch (err) {
       clearInterval(timer);
@@ -273,14 +237,15 @@ export default function App() {
     }
   }, []);
 
-  const info = skinType ? PROFILE_INFO[skinType] : null;
   const produkte = skinType ? PRODUKTE[skinType][budget] : null;
+  const typeLabel = skinType === "combination" ? "Mischhaut" : skinType === "dry" ? "Trockene Haut" : skinType === "oily" ? "Fettige Haut" : "";
+  const typeEmoji = skinType === "combination" ? "⚖️" : skinType === "dry" ? "🌿" : "💧";
 
   return (
     <div style={{ fontFamily: "-apple-system, sans-serif", maxWidth: 430, margin: "0 auto", minHeight: "100vh", background: "#f8fafc", display: "flex", flexDirection: "column" }}>
       <div style={{ padding: "16px 20px 12px", background: "white", borderBottom: "1px solid #f0f0f0", display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 10 }}>
         <div style={{ fontSize: 20, fontWeight: 800, color: "#111827", letterSpacing: "-0.03em" }}>skyn<span style={{ color: "#3b82f6" }}>.</span></div>
-        {info && <div style={{ display: "flex", alignItems: "center", gap: 5, background: "#eff6ff", borderRadius: 99, padding: "4px 10px" }}><span style={{ fontSize: 11 }}>{info.emoji}</span><span style={{ fontSize: 11, fontWeight: 600, color: "#3b82f6" }}>{info.type}</span></div>}
+        {skinType && <div style={{ display: "flex", alignItems: "center", gap: 5, background: "#eff6ff", borderRadius: 99, padding: "4px 10px" }}><span style={{ fontSize: 11 }}>{typeEmoji}</span><span style={{ fontSize: 11, fontWeight: 600, color: "#3b82f6" }}>{typeLabel}</span></div>}
       </div>
 
       <div style={{ flex: 1, overflowY: "auto", paddingBottom: 80 }}>
@@ -326,14 +291,25 @@ export default function App() {
               </>
             )}
 
-            {phase === "result" && info && (
+            {phase === "result" && skinData && (
               <>
                 <div style={{ background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", borderRadius: 16, padding: 16, marginBottom: 12, color: "white", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <div><div style={{ fontSize: 11, opacity: 0.75, marginBottom: 2 }}>DEIN HAUTTYP</div><div style={{ fontSize: 20, fontWeight: 800 }}>{info.emoji} {info.type}</div><div style={{ fontSize: 11, opacity: 0.8, marginTop: 3 }}>{info.concerns.join(" · ")}</div></div>
-                  <div style={{ textAlign: "center" }}><div style={{ width: 48, height: 48, borderRadius: "50%", background: "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 800 }}>{info.score}</div><div style={{ fontSize: 9, opacity: 0.7, marginTop: 2 }}>Score</div></div>
+                  <div>
+                    <div style={{ fontSize: 11, opacity: 0.75, marginBottom: 2 }}>DEIN HAUTTYP</div>
+                    <div style={{ fontSize: 20, fontWeight: 800 }}>{typeEmoji} {typeLabel}</div>
+                    <div style={{ fontSize: 11, opacity: 0.8, marginTop: 3 }}>{(skinData.concerns || []).join(" · ")}</div>
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "50%", background: "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 800 }}>{skinData.score || 70}</div>
+                    <div style={{ fontSize: 9, opacity: 0.7, marginTop: 2 }}>Score</div>
+                  </div>
                 </div>
-                <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 10, border: "1px solid #f0f0f0", fontSize: 13, color: "#374151", lineHeight: 1.7 }}>{info.summary}</div>
-                <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 10, border: "1px solid #f0f0f0" }}>{Object.entries(info.traits).map(([k,v]) => <TraitBar key={k} label={k} value={v} />)}</div>
+                <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 10, border: "1px solid #f0f0f0", fontSize: 13, color: "#374151", lineHeight: 1.7 }}>{skinData.summary}</div>
+                {skinData.scores && (
+                  <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 10, border: "1px solid #f0f0f0" }}>
+                    {Object.entries(skinData.scores).map(([k,v]) => <TraitBar key={k} label={k} value={v} />)}
+                  </div>
+                )}
                 <button onClick={() => setTab("routine")} style={{ width: "100%", padding: "13px", borderRadius: 12, background: "#111827", color: "white", border: "none", fontSize: 14, fontWeight: 700, cursor: "pointer", marginBottom: 8 }}>Meine Routine ansehen →</button>
                 <button onClick={reset} style={{ width: "100%", padding: "10px", borderRadius: 10, border: "1px solid #e5e7eb", background: "none", color: "#6b7280", fontSize: 12, cursor: "pointer" }}>Neues Foto</button>
               </>
