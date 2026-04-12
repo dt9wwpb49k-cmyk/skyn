@@ -6,43 +6,48 @@ const PRODUKTE = {
   combination: {
     drogerie: {
       morning: [
-        { step: "Reinigung", name: "CeraVe Foaming Cleanser", brand: "CeraVe", price: "12,99 €", link: "https://www.lookfantastic.de/cerave-foaming-cleanser/11288806.html", ev: "B", evNote: "Ceramid-Reiniger schützt Hautbarriere." },
+        { step: "Reinigung", name: "CeraVe Foaming Cleanser", brand: "CeraVe", price: "12,99 €", link: "https://www.lookfantastic.de/cerave-foaming-cleanser/11288806.html", ev: "B", evNote: "Ceramid-Reiniger schuetzt Hautbarriere." },
+        { step: "Vitamin C Serum", name: "LOreal Revitalift 12% Vitamin C", brand: "LOreal", price: "14,99 €", link: "https://www.dm.de/l-oreal-paris-revitalift-clinical-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: hemmt Talg, schuetzt vor freien Radikalen, hellt Pigmentflecken auf." },
         { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "RCTs: Talgregulation und Porenverfeinerung." },
         { step: "Feuchtigkeitspflege", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel klinisch getestet." },
         { step: "Sonnenschutz", name: "Altruist Fluid SPF50", brand: "Altruist", price: "3,99 €", link: "https://www.amazon.de/s?k=altruist+spf+50", ev: "A", evNote: "SPF taeglich = 24% weniger Hautalterung.", spf: true },
       ],
       evening: [
         { step: "Reinigung", name: "Simple Micellar Water", brand: "Simple", price: "4,99 €", link: "https://www.dm.de/simple-kind-to-skin-micellar-cleansing-water/", ev: "B", evNote: "Mizellenwasser klinisch bestaetigt." },
-        { step: "Exfoliant", name: "The Ordinary AHA 30% BHA 2%", brand: "The Ordinary", price: "8,90 €", link: "https://www.notino.de/the-ordinary/aha-30-bha-2-peeling-solution/", ev: "A", evNote: "AHA/BHA RCT-belegt.", highlight: true, freq: "2x pro Woche" },
-        { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel klinisch getestet." },
+        { step: "BHA Exfoliant", name: "The Ordinary AHA 30% BHA 2%", brand: "The Ordinary", price: "8,90 €", link: "https://www.notino.de/the-ordinary/aha-30-bha-2-peeling-solution/", ev: "A", evNote: "AHA/BHA RCT-belegt. Nicht gleichzeitig mit Retinol anwenden.", highlight: true, freq: "2-3x pro Woche" },
+        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid beruhigt nach Exfoliation." },
+        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol abends: FDA-anerkannt gegen Unreinheiten und Hautalterung. Nicht gleichzeitig mit BHA.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel als Abschluss." },
       ]
     },
     midrange: {
       morning: [
         { step: "Reinigung", name: "CeraVe Foaming Cleanser", brand: "CeraVe", price: "12,99 €", link: "https://www.lookfantastic.de/cerave-foaming-cleanser/11288806.html", ev: "B", evNote: "Ceramid-Reiniger." },
-        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "18,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "20 RCTs, AAD-empfohlen." },
-        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Talgregulation und Poren." },
+        { step: "Vitamin C Serum", name: "Garnier Vitamin C Serum", brand: "Garnier", price: "12,99 €", link: "https://www.dm.de/garnier-skin-active-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: Strahlkraft, Talgkontrolle, Schutz vor oxidativem Stress." },
+        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "18,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "20 RCTs, AAD-empfohlen. Nur morgens, nicht mit Retinol kombinieren.", freq: "Taeglich morgens" },
+        { step: "Feuchtigkeitspflege", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel oelfrei." },
         { step: "Sonnenschutz", name: "La Roche-Posay Anthelios SPF50", brand: "La Roche-Posay", price: "19,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-anthelios-spf50/", ev: "A", evNote: "AAD-Goldstandard.", spf: true },
       ],
       evening: [
-        { step: "Reinigung", name: "Simple Micellar Water", brand: "Simple", price: "4,99 €", link: "https://www.dm.de/simple-kind-to-skin-micellar-cleansing-water/", ev: "B", evNote: "Klinisch bestaetigt." },
-        { step: "Exfoliant", name: "The Ordinary AHA 30% BHA 2%", brand: "The Ordinary", price: "8,90 €", link: "https://www.notino.de/the-ordinary/aha-30-bha-2-peeling-solution/", ev: "A", evNote: "AHA/BHA RCT-belegt.", highlight: true, freq: "2x pro Woche" },
-        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid: meistbelegter Wirkstoff." },
-        { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel." },
+        { step: "Reinigung", name: "CeraVe Foaming Cleanser", brand: "CeraVe", price: "12,99 €", link: "https://www.lookfantastic.de/cerave-foaming-cleanser/11288806.html", ev: "B", evNote: "Ceramid-Reiniger." },
+        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol: beruhigt und staerkt Barriere." },
+        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt gegen Unreinheiten und Hautalterung.", highlight: true, freq: "3x pro Woche" },
+        { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel als Abschluss." },
       ]
     },
     premium: {
       morning: [
-        { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Hochwertig, limitierte RCT-Daten." },
-        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard fuer Poren." },
-        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Bester Preis-Wirkung-Wirkstoff." },
+        { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Luxurioese Reinigung." },
+        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste klinische Evidenz fuer Strahlkraft und Kollagenproduktion." },
+        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard fuer Poren.", freq: "Taeglich morgens" },
+        { step: "Feuchtigkeitspflege", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel." },
         { step: "Sonnenschutz", name: "Isdin Eryfotona Actinica SPF100", brand: "Isdin", price: "38,00 €", link: "https://www.lookfantastic.de/isdin-eryfotona-actinica-spf100/", ev: "A", evNote: "SPF100 und Photolyase.", spf: true },
       ],
       evening: [
         { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Naehrend." },
-        { step: "Exfoliant", name: "The Ordinary AHA 30% BHA 2%", brand: "The Ordinary", price: "8,90 €", link: "https://www.notino.de/the-ordinary/aha-30-bha-2-peeling-solution/", ev: "A", evNote: "AHA/BHA RCT-belegt.", highlight: true, freq: "2x pro Woche" },
-        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid." },
-        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration klinisch bestaetigt." },
+        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
+        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: staerkste klinische Dosis fuer Anti-Aging und Unreinheiten.", highlight: true, freq: "3x pro Woche" },
+        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration nach Retinol besonders wichtig." },
       ]
     }
   },
@@ -50,41 +55,48 @@ const PRODUKTE = {
     drogerie: {
       morning: [
         { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Ceramide und HA klinisch belegt." },
-        { step: "Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
-        { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Klinisch getestet." },
-        { step: "Sonnenschutz", name: "Altruist Fluid SPF50", brand: "Altruist", price: "3,99 €", link: "https://www.amazon.de/s?k=altruist+spf+50", ev: "A", evNote: "SPF taeglich = 24% weniger Hautalterung.", spf: true },
+        { step: "Vitamin C Serum", name: "LOreal Revitalift 12% Vitamin C", brand: "LOreal", price: "14,99 €", link: "https://www.dm.de/l-oreal-paris-revitalift-clinical-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: Kollagenproduktion, Schutz, Strahlkraft." },
+        { step: "HA Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
+        { step: "Creme", name: "First Aid Beauty Ultra Repair Cream", brand: "First Aid Beauty", price: "18,00 €", link: "https://www.lookfantastic.de/first-aid-beauty-ultra-repair-cream/", ev: "B", evNote: "Reichhaltige Creme fuer trockene Haut." },
+        { step: "Sonnenschutz", name: "Altruist Fluid SPF50", brand: "Altruist", price: "3,99 €", link: "https://www.amazon.de/s?k=altruist+spf+50", ev: "A", evNote: "SPF taeglich unverzichtbar.", spf: true },
       ],
       evening: [
-        { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Ceramid-Reiniger." },
-        { step: "Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
-        { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Klinisch belegt.", highlight: true, freq: "3-4x pro Woche" },
+        { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Sanfte Reinigung ohne Austrocknen." },
+        { step: "HA Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA vor Retinol aufpolstern." },
+        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol auch bei trockener Haut wichtig - immer mit reichhaltiger Creme kombinieren.", highlight: true, freq: "1-2x pro Woche" },
+        { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Rosehip Oil nach Retinol: beruhigt und naehrt.", freq: "3-4x pro Woche" },
+        { step: "Nachtcreme", name: "First Aid Beauty Ultra Repair Cream", brand: "First Aid Beauty", price: "18,00 €", link: "https://www.lookfantastic.de/first-aid-beauty-ultra-repair-cream/", ev: "B", evNote: "Reichhaltige Creme versiegelt Feuchtigkeit nach Retinol." },
       ]
     },
     midrange: {
       morning: [
         { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Ceramide und HA klinisch belegt." },
+        { step: "Vitamin C Serum", name: "Garnier Vitamin C Serum", brand: "Garnier", price: "12,99 €", link: "https://www.dm.de/garnier-skin-active-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: Kollagen, Strahlkraft, Schutz." },
         { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Multi-HA verschiedene Penetrationstiefen." },
-        { step: "Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
+        { step: "Creme", name: "First Aid Beauty Ultra Repair Cream", brand: "First Aid Beauty", price: "18,00 €", link: "https://www.lookfantastic.de/first-aid-beauty-ultra-repair-cream/", ev: "B", evNote: "Reichhaltig, klinisch getestet." },
         { step: "Sonnenschutz", name: "La Roche-Posay Anthelios SPF50", brand: "La Roche-Posay", price: "19,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-anthelios-spf50/", ev: "A", evNote: "AAD-Goldstandard.", spf: true },
       ],
       evening: [
-        { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Ceramid-Reiniger." },
-        { step: "Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
-        { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Klinisch belegt.", highlight: true, freq: "3-4x pro Woche" },
-        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration." },
+        { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Sanfte Reinigung." },
+        { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Intensive Hydration vor Retinol." },
+        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt - sanfte Formel fuer empfindliche Haut.", highlight: true, freq: "2x pro Woche" },
+        { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Beruhigt nach Retinol.", freq: "3-4x pro Woche" },
+        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration versiegelt Feuchtigkeit." },
       ]
     },
     premium: {
       morning: [
-        { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Hochwertig." },
-        { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Bestes HA-Produkt." },
-        { step: "Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
+        { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Naehrende Reinigung." },
+        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste Evidenz fuer Kollagen und Strahlkraft." },
+        { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Multi-HA Basis." },
+        { step: "Creme", name: "First Aid Beauty Ultra Repair Cream", brand: "First Aid Beauty", price: "18,00 €", link: "https://www.lookfantastic.de/first-aid-beauty-ultra-repair-cream/", ev: "B", evNote: "Reichhaltige Barrier-Creme." },
         { step: "Sonnenschutz", name: "Isdin Eryfotona Actinica SPF100", brand: "Isdin", price: "38,00 €", link: "https://www.lookfantastic.de/isdin-eryfotona-actinica-spf100/", ev: "A", evNote: "SPF100 und Photolyase.", spf: true },
       ],
       evening: [
         { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Naehrend." },
-        { step: "Serum", name: "The Inkey List Hyaluronic Acid", brand: "The Inkey List", price: "9,99 €", link: "https://www.lookfantastic.de/the-inkey-list-hyaluronic-acid-serum/", ev: "B", evNote: "HA klinisch belegt." },
-        { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Klinisch belegt.", highlight: true, freq: "3-4x pro Woche" },
+        { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Intensive Hydration vor Retinol." },
+        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: staerkste klinische Dosis.", highlight: true, freq: "2x pro Woche" },
+        { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Beruhigt und naehrt nach Retinol.", freq: "3-4x pro Woche" },
         { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration." },
       ]
     }
@@ -93,42 +105,49 @@ const PRODUKTE = {
     drogerie: {
       morning: [
         { step: "Reinigung", name: "Cetaphil Gentle Skin Cleanser", brand: "Cetaphil", price: "10,99 €", link: "https://www.shop-apotheke.com/beauty/cetaphil-gentle-skin-cleanser/", ev: "B", evNote: "AAD-empfohlen." },
+        { step: "Vitamin C Serum", name: "LOreal Revitalift 12% Vitamin C", brand: "LOreal", price: "14,99 €", link: "https://www.dm.de/l-oreal-paris-revitalift-clinical-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: hemmt Talgproduktion, schuetzt vor freien Radikalen." },
         { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "52% Mitesser-Reduktion im RCT." },
         { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Oelfrei, klinisch getestet." },
         { step: "Sonnenschutz", name: "Altruist Fluid SPF50", brand: "Altruist", price: "3,99 €", link: "https://www.amazon.de/s?k=altruist+spf+50", ev: "A", evNote: "SPF taeglich = 24% weniger Hautalterung.", spf: true },
       ],
       evening: [
         { step: "Reinigung", name: "Cetaphil Gentle Skin Cleanser", brand: "Cetaphil", price: "10,99 €", link: "https://www.shop-apotheke.com/beauty/cetaphil-gentle-skin-cleanser/", ev: "B", evNote: "AAD-empfohlen." },
-        { step: "Exfoliant", name: "COSRX AHA BHA Toner", brand: "COSRX", price: "18,00 €", link: "https://www.yesstyle.com/en/cosrx-aha-bha-clarifying-treatment-toner/", ev: "B", evNote: "Taeglich nutzbar." },
-        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "100 RCTs, FDA-anerkannt.", highlight: true, freq: "3x pro Woche" },
+        { step: "BHA Exfoliant", name: "COSRX AHA BHA Toner", brand: "COSRX", price: "18,00 €", link: "https://www.yesstyle.com/en/cosrx-aha-bha-clarifying-treatment-toner/", ev: "B", evNote: "Milde AHA/BHA taeglich nutzbar. Nicht gleichzeitig mit Retinol.", freq: "Taeglich oder abwechselnd mit Retinol" },
+        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol: beruhigt Haut." },
+        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol bei fettiger Haut besonders effektiv gegen Poren und Unreinheiten.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Leichter Abschluss nach Retinol." },
       ]
     },
     midrange: {
       morning: [
-        { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch getestet." },
-        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard fuer Poren." },
-        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "52% Mitesser-Reduktion." },
+        { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch bei fettiger Haut getestet." },
+        { step: "Vitamin C Serum", name: "Garnier Vitamin C Serum", brand: "Garnier", price: "12,99 €", link: "https://www.dm.de/garnier-skin-active-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: hemmt Talg, schuetzt, hellt auf." },
+        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "52% Mitesser-Reduktion im RCT." },
+        { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Oelfrei." },
         { step: "Sonnenschutz", name: "La Roche-Posay Anthelios SPF50", brand: "La Roche-Posay", price: "19,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-anthelios-spf50/", ev: "A", evNote: "AAD-Goldstandard.", spf: true },
       ],
       evening: [
         { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch getestet." },
-        { step: "Exfoliant", name: "COSRX AHA BHA Toner", brand: "COSRX", price: "18,00 €", link: "https://www.yesstyle.com/en/cosrx-aha-bha-clarifying-treatment-toner/", ev: "B", evNote: "Taeglich nutzbar." },
-        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "100 RCTs.", highlight: true, freq: "3x pro Woche" },
-        { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Oelfrei." },
+        { step: "BHA Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard fuer Poren. Nicht gleichzeitig mit Retinol.", highlight: true, freq: "3x pro Woche - abwechselnd mit Retinol" },
+        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
+        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt gegen Poren und Unreinheiten.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Leichter Abschluss." },
       ]
     },
     premium: {
       morning: [
         { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch getestet." },
-        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Bestes BHA." },
+        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste Evidenz." },
         { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Unschlagbar." },
+        { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Oelfrei." },
         { step: "Sonnenschutz", name: "Isdin Eryfotona Actinica SPF100", brand: "Isdin", price: "38,00 €", link: "https://www.lookfantastic.de/isdin-eryfotona-actinica-spf100/", ev: "A", evNote: "SPF100 und Photolyase.", spf: true },
       ],
       evening: [
-        { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Luxurioes." },
-        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard." },
-        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "100 RCTs.", highlight: true, freq: "3x pro Woche" },
-        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration." },
+        { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch getestet." },
+        { step: "BHA Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Bestes BHA. Nicht gleichzeitig mit Retinol.", highlight: true, freq: "3x pro Woche - abwechselnd mit Retinol" },
+        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
+        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: maximale Wirkung gegen Poren und Unreinheiten.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration nach Retinol." },
       ]
     }
   }
