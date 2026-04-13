@@ -14,31 +14,31 @@ const PRODUKTE = {
       ],
       evening: [
         { step: "Reinigung", name: "Simple Micellar Water", brand: "Simple", price: "4,99 €", link: "https://www.dm.de/simple-kind-to-skin-micellar-cleansing-water/", ev: "B", evNote: "Mizellenwasser klinisch bestaetigt." },
-        { step: "BHA Exfoliant", name: "The Ordinary AHA 30% BHA 2%", brand: "The Ordinary", price: "8,90 €", link: "https://www.notino.de/the-ordinary/aha-30-bha-2-peeling-solution/", ev: "A", evNote: "AHA/BHA RCT-belegt. Nicht gleichzeitig mit Retinol anwenden.", highlight: true, freq: "2-3x pro Woche" },
+        { step: "BHA Exfoliant", name: "The Ordinary AHA 30% BHA 2%", brand: "The Ordinary", price: "8,90 €", link: "https://www.notino.de/the-ordinary/aha-30-bha-2-peeling-solution/", ev: "A", evNote: "AHA/BHA RCT-belegt. Nicht gleichzeitig mit Retinol.", highlight: true, freq: "2-3x pro Woche" },
         { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid beruhigt nach Exfoliation." },
-        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol abends: FDA-anerkannt gegen Unreinheiten und Hautalterung. Nicht gleichzeitig mit BHA.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol abends: FDA-anerkannt. Nicht gleichzeitig mit BHA.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
         { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel als Abschluss." },
       ]
     },
     midrange: {
       morning: [
         { step: "Reinigung", name: "CeraVe Foaming Cleanser", brand: "CeraVe", price: "12,99 €", link: "https://www.lookfantastic.de/cerave-foaming-cleanser/11288806.html", ev: "B", evNote: "Ceramid-Reiniger." },
-        { step: "Vitamin C Serum", name: "Garnier Vitamin C Serum", brand: "Garnier", price: "12,99 €", link: "https://www.dm.de/garnier-skin-active-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: Strahlkraft, Talgkontrolle, Schutz vor oxidativem Stress." },
-        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "18,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "20 RCTs, AAD-empfohlen. Nur morgens, nicht mit Retinol kombinieren.", freq: "Taeglich morgens" },
+        { step: "Vitamin C Serum", name: "Garnier Vitamin C Serum", brand: "Garnier", price: "12,99 €", link: "https://www.dm.de/garnier-skin-active-vitamin-c-serum/", ev: "A", evNote: "Vitamin C morgens: Strahlkraft, Talgkontrolle, Schutz." },
+        { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "18,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "20 RCTs, AAD-empfohlen.", freq: "Taeglich morgens" },
         { step: "Feuchtigkeitspflege", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel oelfrei." },
         { step: "Sonnenschutz", name: "La Roche-Posay Anthelios SPF50", brand: "La Roche-Posay", price: "19,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-anthelios-spf50/", ev: "A", evNote: "AAD-Goldstandard.", spf: true },
       ],
       evening: [
         { step: "Reinigung", name: "CeraVe Foaming Cleanser", brand: "CeraVe", price: "12,99 €", link: "https://www.lookfantastic.de/cerave-foaming-cleanser/11288806.html", ev: "B", evNote: "Ceramid-Reiniger." },
-        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol: beruhigt und staerkt Barriere." },
-        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt gegen Unreinheiten und Hautalterung.", highlight: true, freq: "3x pro Woche" },
+        { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
+        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt.", highlight: true, freq: "3x pro Woche" },
         { step: "Creme", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel als Abschluss." },
       ]
     },
     premium: {
       morning: [
         { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Luxurioese Reinigung." },
-        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste klinische Evidenz fuer Strahlkraft und Kollagenproduktion." },
+        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste klinische Evidenz." },
         { step: "Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard fuer Poren.", freq: "Taeglich morgens" },
         { step: "Feuchtigkeitspflege", name: "Neutrogena Hydro Boost Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "HA-Gel." },
         { step: "Sonnenschutz", name: "Isdin Eryfotona Actinica SPF100", brand: "Isdin", price: "38,00 €", link: "https://www.lookfantastic.de/isdin-eryfotona-actinica-spf100/", ev: "A", evNote: "SPF100 und Photolyase.", spf: true },
@@ -46,8 +46,8 @@ const PRODUKTE = {
       evening: [
         { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Naehrend." },
         { step: "Serum", name: "The Ordinary Niacinamide 10%", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
-        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: staerkste klinische Dosis fuer Anti-Aging und Unreinheiten.", highlight: true, freq: "3x pro Woche" },
-        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration nach Retinol besonders wichtig." },
+        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: staerkste klinische Dosis.", highlight: true, freq: "3x pro Woche" },
+        { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration nach Retinol." },
       ]
     }
   },
@@ -79,7 +79,7 @@ const PRODUKTE = {
       evening: [
         { step: "Reinigung", name: "CeraVe Hydrating Cleanser", brand: "CeraVe", price: "13,99 €", link: "https://www.lookfantastic.de/cerave-hydrating-facial-cleanser/11288802.html", ev: "B", evNote: "Sanfte Reinigung." },
         { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Intensive Hydration vor Retinol." },
-        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt - sanfte Formel fuer empfindliche Haut.", highlight: true, freq: "2x pro Woche" },
+        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Sanfte Formel fuer empfindliche Haut.", highlight: true, freq: "2x pro Woche" },
         { step: "Oel", name: "The Ordinary Rosehip Seed Oil", brand: "The Ordinary", price: "10,90 €", link: "https://www.notino.de/the-ordinary/100-organisches-kaltgepresstes-hagebuttenoel/", ev: "B", evNote: "Beruhigt nach Retinol.", freq: "3-4x pro Woche" },
         { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration versiegelt Feuchtigkeit." },
       ]
@@ -87,7 +87,7 @@ const PRODUKTE = {
     premium: {
       morning: [
         { step: "Reinigung", name: "Elemis Pro-Collagen Cleansing Balm", brand: "Elemis", price: "28,00 €", link: "https://www.lookfantastic.de/elemis-pro-collagen-cleansing-balm/", ev: "C", evNote: "Naehrende Reinigung." },
-        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste Evidenz fuer Kollagen und Strahlkraft." },
+        { step: "Vitamin C Serum", name: "Paulas Choice C15 Super Booster", brand: "Paulas Choice", price: "48,00 €", link: "https://www.paulaschoice.de/c15-super-booster/", ev: "A", evNote: "15% Vitamin C: staerkste Evidenz." },
         { step: "Essence", name: "Hada Labo Gokujyun Lotion", brand: "Hada Labo", price: "16,50 €", link: "https://www.yesstyle.com/en/hada-labo-gokujyun-premium-lotion/", ev: "B", evNote: "Multi-HA Basis." },
         { step: "Creme", name: "First Aid Beauty Ultra Repair Cream", brand: "First Aid Beauty", price: "18,00 €", link: "https://www.lookfantastic.de/first-aid-beauty-ultra-repair-cream/", ev: "B", evNote: "Reichhaltige Barrier-Creme." },
         { step: "Sonnenschutz", name: "Isdin Eryfotona Actinica SPF100", brand: "Isdin", price: "38,00 €", link: "https://www.lookfantastic.de/isdin-eryfotona-actinica-spf100/", ev: "A", evNote: "SPF100 und Photolyase.", spf: true },
@@ -112,9 +112,9 @@ const PRODUKTE = {
       ],
       evening: [
         { step: "Reinigung", name: "Cetaphil Gentle Skin Cleanser", brand: "Cetaphil", price: "10,99 €", link: "https://www.shop-apotheke.com/beauty/cetaphil-gentle-skin-cleanser/", ev: "B", evNote: "AAD-empfohlen." },
-        { step: "BHA Exfoliant", name: "COSRX AHA BHA Toner", brand: "COSRX", price: "18,00 €", link: "https://www.yesstyle.com/en/cosrx-aha-bha-clarifying-treatment-toner/", ev: "B", evNote: "Milde AHA/BHA taeglich nutzbar. Nicht gleichzeitig mit Retinol.", freq: "Taeglich oder abwechselnd mit Retinol" },
-        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol: beruhigt Haut." },
-        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol bei fettiger Haut besonders effektiv gegen Poren und Unreinheiten.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "BHA Exfoliant", name: "COSRX AHA BHA Toner", brand: "COSRX", price: "18,00 €", link: "https://www.yesstyle.com/en/cosrx-aha-bha-clarifying-treatment-toner/", ev: "B", evNote: "Milde AHA/BHA. Nicht gleichzeitig mit Retinol.", freq: "Abwechselnd mit Retinol" },
+        { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
+        { step: "Retinol", name: "The Ordinary Retinol 0.5%", brand: "The Ordinary", price: "6,50 €", link: "https://www.notino.de/the-ordinary/retinol-0-5-in-squalan/", ev: "A", evNote: "Retinol bei fettiger Haut besonders effektiv.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
         { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Leichter Abschluss nach Retinol." },
       ]
     },
@@ -130,7 +130,7 @@ const PRODUKTE = {
         { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch getestet." },
         { step: "BHA Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Goldstandard fuer Poren. Nicht gleichzeitig mit Retinol.", highlight: true, freq: "3x pro Woche - abwechselnd mit Retinol" },
         { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
-        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt gegen Poren und Unreinheiten.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Retinol", name: "La Roche-Posay Redermic Retinol", brand: "La Roche-Posay", price: "25,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-redermic-retinol/", ev: "A", evNote: "Retinol klinisch belegt.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
         { step: "Gel", name: "Neutrogena Hydro Boost Water Gel", brand: "Neutrogena", price: "14,99 €", link: "https://www.dm.de/neutrogena-hydro-boost-water-gel/", ev: "B", evNote: "Leichter Abschluss." },
       ]
     },
@@ -146,7 +146,7 @@ const PRODUKTE = {
         { step: "Reinigung", name: "La Roche-Posay Effaclar Gel", brand: "La Roche-Posay", price: "14,90 €", link: "https://www.shop-apotheke.com/beauty/la-roche-posay-effaclar-gel/", ev: "B", evNote: "Klinisch getestet." },
         { step: "BHA Toner", name: "Paulas Choice 2% BHA", brand: "Paulas Choice", price: "32,00 €", link: "https://www.paulaschoice.de/skin-perfecting-2-bha-fluessig-peeling/", ev: "A", evNote: "Bestes BHA. Nicht gleichzeitig mit Retinol.", highlight: true, freq: "3x pro Woche - abwechselnd mit Retinol" },
         { step: "Serum", name: "The Ordinary Niacinamide 10% Zinc", brand: "The Ordinary", price: "6,80 €", link: "https://www.notino.de/the-ordinary/niacinamide-10-zinc-1-serum/", ev: "A", evNote: "Niacinamid vor Retinol." },
-        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: maximale Wirkung gegen Poren und Unreinheiten.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
+        { step: "Retinol", name: "Paulas Choice 1% Retinol", brand: "Paulas Choice", price: "62,00 €", link: "https://www.paulaschoice.de/clinical-1pct-retinol-treatment/", ev: "A", evNote: "1% Retinol: maximale Wirkung.", highlight: true, freq: "3x pro Woche - abwechselnd mit BHA" },
         { step: "Nachtcreme", name: "Laneige Water Sleeping Mask", brand: "Laneige", price: "29,00 €", link: "https://www.yesstyle.com/en/laneige-water-sleeping-mask/", ev: "B", evNote: "Overnight-Hydration nach Retinol." },
       ]
     }
@@ -160,7 +160,7 @@ async function analyseHaut(base64) {
       role: "user",
       content: [
         { type: "image", source: { type: "base64", media_type: "image/jpeg", data: base64 } },
-        { type: "text", text: "Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON ohne Text davor oder danach.\n\nWenn KEIN Gesicht sichtbar: {\"ok\":false,\"issue\":\"Kein Gesicht erkannt - bitte Selfie aufnehmen\"}\nWenn von unten/oben/dunkel/unscharf: {\"ok\":false,\"issue\":\"Hinweis auf Deutsch\"}\n\nWenn normales Selfie: {\"ok\":true,\"skinType\":\"combination\",\"score\":69,\"scores\":{\"Feuchtigkeit\":42,\"Talgproduktion\":68,\"Empfindlichkeit\":35,\"Elastizitaet\":71},\"concerns\":[\"T-Zone Glanz\",\"Vergroesserte Poren\"],\"summary\":\"Kurze individuelle Beschreibung auf Deutsch.\"}\n\nskinType: combination, dry oder oily. Alle Scores 0-100 realistisch basierend auf dem Foto. Nur JSON." }
+        { type: "text", text: "Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON ohne Text davor oder danach.\n\nWenn KEIN Gesicht sichtbar: {\"ok\":false,\"issue\":\"Kein Gesicht erkannt - bitte Selfie aufnehmen\"}\nWenn von unten/oben/dunkel/unscharf: {\"ok\":false,\"issue\":\"Hinweis auf Deutsch\"}\n\nWenn normales Selfie: {\"ok\":true,\"skinType\":\"combination\",\"score\":69,\"scores\":{\"Feuchtigkeit\":42,\"Talgproduktion\":68,\"Empfindlichkeit\":35,\"Elastizitaet\":71},\"concerns\":[\"T-Zone Glanz\",\"Vergroesserte Poren\"],\"summary\":\"Kurze individuelle Beschreibung auf Deutsch.\"}\n\nskinType: combination, dry oder oily. Alle Scores 0-100 realistisch. Nur JSON." }
       ]
     }]
   };
@@ -201,7 +201,7 @@ function TraitBar({ label, value }) {
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-        <span style={{ fontSize: 10, color: "#6b7280" }}>{label}</span>
+        <span style={{ fontSize: 10, color: "#6b7280" }}>{label === "Elastizitaet" ? "Elastizitaet" : label}</span>
         <span style={{ fontSize: 10, fontWeight: 600, color: "#374151" }}>{value}%</span>
       </div>
       <div style={{ height: 3, background: "#f0f0f0", borderRadius: 99 }}>
@@ -213,8 +213,8 @@ function TraitBar({ label, value }) {
 
 function ProductCard({ item, idx }) {
   const [evOpen, setEvOpen] = useState(false);
-  const evMap = { A: ["#dcfce7", "#15803d", "\u2605\u2605\u2605"], B: ["#dbeafe", "#1d4ed8", "\u2605\u2605\u2606"], C: ["#fef9c3", "#92400e", "\u2605\u2606\u2606"] };
-  const ev = evMap[item.ev] || ["#f0f0f0", "#6b7280", "\u2606\u2606\u2606"];
+  const evMap = { A: ["#dcfce7", "#15803d", "AAA"], B: ["#dbeafe", "#1d4ed8", "BBB"], C: ["#fef9c3", "#92400e", "CCC"] };
+  const ev = evMap[item.ev] || ["#f0f0f0", "#6b7280", "---"];
   return (
     <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 8, border: item.spf ? "1.5px solid #fde68a" : item.highlight ? "1.5px solid #bfdbfe" : "1px solid #f0f0f0" }}>
       <div style={{ display: "flex", gap: 10 }}>
@@ -249,7 +249,6 @@ function ProductCard({ item, idx }) {
     </div>
   );
 }
-
 export default function App() {
   const [tab, setTab] = useState("analyse");
   const [phase, setPhase] = useState("upload");
@@ -304,7 +303,7 @@ export default function App() {
     <div style={{ fontFamily: "-apple-system, sans-serif", maxWidth: 430, margin: "0 auto", minHeight: "100vh", background: "#f8fafc", display: "flex", flexDirection: "column" }}>
       <div style={{ padding: "16px 20px 12px", background: "white", borderBottom: "1px solid #f0f0f0", display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 10 }}>
         <div style={{ fontSize: 20, fontWeight: 800, color: "#111827", letterSpacing: "-0.03em" }}>skyn<span style={{ color: "#3b82f6" }}>.</span></div>
-        {skinType && <div style={{ display: "flex", alignItems: "center", gap: 5, background: "#eff6ff", borderRadius: 99, padding: "4px 10px" }}><span style={{ fontSize: 11, fontWeight: 600, color: "#3b82f6" }}>{typeLabel}</span></div>}
+        {skinType && <div style={{ background: "#eff6ff", borderRadius: 99, padding: "4px 10px" }}><span style={{ fontSize: 11, fontWeight: 600, color: "#3b82f6" }}>{typeLabel}</span></div>}
       </div>
 
       <div style={{ flex: 1, overflowY: "auto", paddingBottom: 80 }}>
@@ -328,9 +327,10 @@ export default function App() {
 
             {phase === "loading" && (
               <div style={{ textAlign: "center", padding: "60px 0" }}>
-                {photoUrl && <div style={{ position: "relative", display: "inline-block", marginBottom: 24 }}><img src={photoUrl} alt="" style={{ width: 100, height: 100, borderRadius: "50%", objectFit: "cover", border: "3px solid #dbeafe" }} /></div>}
+                {photoUrl && <div style={{ position: "relative", display: "inline-block", marginBottom: 24 }}><img src={photoUrl} alt="" style={{ width: 100, height: 100, borderRadius: "50%", objectFit: "cover", border: "3px solid #dbeafe" }} /><div style={{ position: "absolute", inset: -5, borderRadius: "50%", border: "3px solid transparent", borderTopColor: "#3b82f6", animation: "spin 1s linear infinite" }} /></div>}
                 <div style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 20 }}>Analyse laeuft</div>
                 {STEPS.map((s, i) => <div key={i} style={{ fontSize: 12, marginBottom: 8, color: i < loadingStep ? "#16a34a" : i === loadingStep ? "#3b82f6" : "#d1d5db", fontWeight: i === loadingStep ? 600 : 400 }}>{i < loadingStep ? "ok" : i === loadingStep ? ">" : "-"} {s}</div>)}
+                <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
               </div>
             )}
 
