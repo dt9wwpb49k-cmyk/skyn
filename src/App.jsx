@@ -160,7 +160,7 @@ async function analyseHaut(base64) {
       role: "user",
       content: [
         { type: "image", source: { type: "base64", media_type: "image/jpeg", data: base64 } },
-        { type: "text", text: "Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON ohne Text davor oder danach.\n\nWenn KEIN Gesicht sichtbar: {\"ok\":false,\"issue\":\"Kein Gesicht erkannt - bitte Selfie aufnehmen\"}\nWenn von unten/oben/dunkel/unscharf: {\"ok\":false,\"issue\":\"Hinweis auf Deutsch\"}\n\nWenn normales Selfie: {\"ok\":true,\"skinType\":\"combination\",\"score\":69,\"scores\":{\"Feuchtigkeit\":42,\"Talgproduktion\":68,\"Empfindlichkeit\":35,\"Elastizitaet\":71},\"concerns\":[\"T-Zone Glanz\",\"Vergroesserte Poren\"],\"summary\":\"Kurze individuelle Beschreibung auf Deutsch.\"}\n\nskinType: combination, dry oder oily. Alle Scores 0-100 realistisch. Nur JSON." }
+        { type: "text", text: "Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON ohne Text davor oder danach.\n\nWenn KEIN Gesicht sichtbar: {\"ok\":false,\"issue\":\"Kein Gesicht erkannt - bitte Selfie aufnehmen\"}\nWenn von unten/oben/dunkel/unscharf: {\"ok\":false,\"issue\":\"Hinweis auf Deutsch\"}\n\nWenn normales Selfie: {\"ok\":true,\"skinType\":\"combination\",\"score\":69,\"scores\":{\"Feuchtigkeit\":42,\"Talgproduktion\":68,\"Empfindlichkeit\":35,\"Elastizitaet\":71},\"concerns\":[\"T-Zone Glanz\",\"Vergroesserte Poren\"],\"summary\":\"Kurze individuelle Beschreibung auf Deutsch.\"}\n\nskinType: combination, dry oder oily. Alle Scores 0-100 realistisch basierend auf dem Foto. Nur JSON." }
       ]
     }]
   };
@@ -201,7 +201,7 @@ function TraitBar({ label, value }) {
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-        <span style={{ fontSize: 10, color: "#6b7280" }}>{label}</span>
+        <span style={{ fontSize: 10, color: "#6b7280" }}>{label === "Elastizitaet" ? "Elastizitaet" : label}</span>
         <span style={{ fontSize: 10, fontWeight: 600, color: "#374151" }}>{value}%</span>
       </div>
       <div style={{ height: 3, background: "#f0f0f0", borderRadius: 99 }}>
@@ -298,7 +298,6 @@ export default function App() {
 
   const produkte = skinType ? PRODUKTE[skinType][budget] : null;
   const typeLabel = skinType === "combination" ? "Mischhaut" : skinType === "dry" ? "Trockene Haut" : skinType === "oily" ? "Fettige Haut" : "";
-  const typeEmoji = skinType === "combination" ? "X" : skinType === "dry" ? "O" : "W";
 
   return (
     <div style={{ fontFamily: "-apple-system, sans-serif", maxWidth: 430, margin: "0 auto", minHeight: "100vh", background: "#f8fafc", display: "flex", flexDirection: "column" }}>
@@ -317,7 +316,7 @@ export default function App() {
                   <div style={{ fontSize: 13, color: "#6b7280", marginTop: 6, lineHeight: 1.6 }}>Ein Selfie - KI analysiert Hauttyp und erstellt deine Routine.</div>
                 </div>
                 <div onClick={() => fileRef.current?.click()} style={{ border: "2px dashed #dbeafe", borderRadius: 20, padding: "48px 20px", textAlign: "center", cursor: "pointer", background: "#f0f7ff", marginBottom: 12 }}>
-                  <div style={{ fontSize: 40, marginBottom: 10 }}>Foto</div>
+                  <div style={{ fontSize: 40, marginBottom: 10 }}>📸</div>
                   <div style={{ fontSize: 15, fontWeight: 700, color: "#1d4ed8" }}>Selfie aufnehmen</div>
                   <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>Frontal - Augenhoehe - Tageslicht - kein Make-up</div>
                 </div>
@@ -397,6 +396,7 @@ export default function App() {
                   ))}
                 </div>
                 {produkte && produkte[timeOfDay].map((item, i) => <ProductCard key={i} item={item} idx={i} />)}
+                <div style={{ fontSize: 10, color: "#9ca3af", textAlign: "center", marginTop: 10 }}>Markenunabhaengig - Evidenzbasiert - Affiliate-Links, kein Aufpreis</div>
               </>
             )}
           </div>
