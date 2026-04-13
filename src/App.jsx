@@ -201,7 +201,7 @@ function TraitBar({ label, value }) {
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-        <span style={{ fontSize: 10, color: "#6b7280" }}>{label === "Elastizitaet" ? "Elastizitaet" : label}</span>
+        <span style={{ fontSize: 10, color: "#6b7280" }}>{label}</span>
         <span style={{ fontSize: 10, fontWeight: 600, color: "#374151" }}>{value}%</span>
       </div>
       <div style={{ height: 3, background: "#f0f0f0", borderRadius: 99 }}>
@@ -213,8 +213,8 @@ function TraitBar({ label, value }) {
 
 function ProductCard({ item, idx }) {
   const [evOpen, setEvOpen] = useState(false);
-  const evMap = { A: ["#dcfce7", "#15803d", "AAA"], B: ["#dbeafe", "#1d4ed8", "BBB"], C: ["#fef9c3", "#92400e", "CCC"] };
-  const ev = evMap[item.ev] || ["#f0f0f0", "#6b7280", "---"];
+  const evMap = { A: ["#dcfce7", "#15803d", "\u2605\u2605\u2605"], B: ["#dbeafe", "#1d4ed8", "\u2605\u2605\u2606"], C: ["#fef9c3", "#92400e", "\u2605\u2606\u2606"] };
+  const ev = evMap[item.ev] || ["#f0f0f0", "#6b7280", "\u2606\u2606\u2606"];
   return (
     <div style={{ background: "white", borderRadius: 12, padding: 12, marginBottom: 8, border: item.spf ? "1.5px solid #fde68a" : item.highlight ? "1.5px solid #bfdbfe" : "1px solid #f0f0f0" }}>
       <div style={{ display: "flex", gap: 10 }}>
@@ -249,6 +249,7 @@ function ProductCard({ item, idx }) {
     </div>
   );
 }
+
 export default function App() {
   const [tab, setTab] = useState("analyse");
   const [phase, setPhase] = useState("upload");
