@@ -22,6 +22,9 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log("API Key exists:", !!process.env.ANTHROPIC_KEY);
+    console.log("API Key starts with:", process.env.ANTHROPIC_KEY?.substring(0, 10));
+
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -33,8 +36,15 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+    console.log("Anthropic status:", response.status);
+    console.log("Anthropic response type:", data.type);
+    if (data.type === "error") {
+      console.log("Anthropic error:", JSON.stringify(data.error));
+    }
+
     res.status(200).json(data);
   } catch (err) {
+    console.log("Catch error:", err.message);
     res.status(500).json({ error: err.message });
   }
 }
