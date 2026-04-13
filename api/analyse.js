@@ -21,30 +21,36 @@ export default async function handler(req, res) {
     return;
   }
 
-  try {
-    console.log("API Key exists:", !!process.env.ANTHROPIC_KEY);
-    console.log("API Key starts with:", process.env.ANTHROPIC_KEY?.substring(0, 10));
+  const maxRetries = 3;
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_KEY,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify(req.body),
-    });
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.ANTHROPIC_KEY,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify(req.body),
+      });
 
-    const data = await response.json();
-    console.log("Anthropic status:", response.status);
-    console.log("Anthropic response type:", data.type);
-    if (data.type === "error") {
-      console.log("Anthropic error:", JSON.stringify(data.error));
+      const data = await response.json();
+
+      if (response.status === 529 && attempt < maxRetries) {
+        console.log("Overloaded, retry", attempt);
+        await new Promise(r => setTimeout(r, 2000 * attempt));
+        continue;
+      }
+
+      res.status(200).json(data);
+      return;
+    } catch (err) {
+      if (attempt === maxRetries) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      await new Promise(r => setTimeout(r, 2000 * attempt));
     }
-
-    res.status(200).json(data);
-  } catch (err) {
-    console.log("Catch error:", err.message);
-    res.status(500).json({ error: err.message });
   }
 }
