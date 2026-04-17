@@ -317,7 +317,7 @@ async function analyseHaut(base64, regler, mediaType) {
       role: "user",
       content: [
         { type: "image", source: { type: "base64", media_type: safeMediaType, data: base64 } },
-        { type: "text", text: "Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON ohne Text davor oder danach.\n\nWenn KEIN Gesicht sichtbar: {\"ok\":false,\"issue\":\"Kein Gesicht erkannt - bitte Selfie aufnehmen\"}\nWenn von unten/oben/dunkel/unscharf: {\"ok\":false,\"issue\":\"Hinweis auf Deutsch\"}\n\nWenn normales Selfie: {\"ok\":true,\"skinType\":\"combination\",\"score\":69,\"scores\":{\"Feuchtigkeit\":42,\"Talgproduktion\":68,\"Empfindlichkeit\":35,\"Elastizitaet\":71},\"concerns\":[\"T-Zone Glanz\",\"Vergroesserte Poren\"],\"summary\":\"Kurze individuelle Beschreibung auf Deutsch.\"}\n\nskinType: combination, dry oder oily. Alle Scores 0-100 realistisch. Nur JSON." + reglerText }
+        { type: "text", text: "Analysiere dieses Gesichtsfoto. Antworte NUR mit JSON ohne Text davor oder danach.\n\nWICHTIG: Sprich den User mit DU an, niemals mit Sie/Ihre.\n\nWenn KEIN Gesicht sichtbar: {\"ok\":false,\"issue\":\"Kein Gesicht erkannt - bitte Selfie aufnehmen\"}\nWenn von unten/oben/dunkel/unscharf: {\"ok\":false,\"issue\":\"Hinweis auf Deutsch\"}\n\nWenn normales Selfie: {\"ok\":true,\"skinType\":\"combination\",\"score\":69,\"scores\":{\"Feuchtigkeit\":42,\"Talgproduktion\":68,\"Empfindlichkeit\":35,\"Elastizitaet\":71},\"concerns\":[\"T-Zone Glanz\",\"Vergroesserte Poren\"],\"summary\":\"Kurze individuelle Beschreibung auf Deutsch mit DU-Ansprache (nicht Sie).\"}\n\nskinType: combination, dry oder oily. Alle Scores 0-100 realistisch. Nur JSON. Duzen!" + reglerText }
       ]
     }]
   };
@@ -499,102 +499,112 @@ function ProductCard({ item, idx, personalReason }) {
 function downloadWochenplan(skinData, skinType, budget, routine, regler) {
   var typeLabel = skinType === "combination" ? "Mischhaut" : skinType === "dry" ? "Trockene Haut" : "Fettige Haut";
   var budgetLabel = budget === "drogerie" ? "Drogerie" : budget === "midrange" ? "Mid-Range" : "Premium";
-  var tage = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
-  function getAnwendungsTage(produktName) {
-    if (produktName === "Retinol") {
-      return { Mo: true, Di: false, Mi: true, Do: false, Fr: true, Sa: false, So: false };
-    }
-    if (produktName === "BHA (Salicylsäure)") {
+  function getHaeufigkeit(p) {
+    var kombiniert = ((p.name || "") + " " + (p.step || "")).toLowerCase();
+    if (/retinol/.test(kombiniert)) return "3× pro Woche (Mo, Mi, Fr)";
+    if (/bha|salicyl/.test(kombiniert)) {
       if (routine.hauptaktiv === "Retinol" && routine.sekundaer === "BHA (Salicylsäure)") {
-        return { Mo: false, Di: true, Mi: false, Do: true, Fr: false, Sa: true, So: false };
+        return "3× pro Woche (Di, Do, Sa)";
       }
-      return { Mo: true, Di: false, Mi: true, Do: false, Fr: true, Sa: false, So: false };
+      return "3× pro Woche (Mo, Mi, Fr)";
     }
-    return { Mo: true, Di: true, Mi: true, Do: true, Fr: true, Sa: true, So: true };
+    if (/azelain/.test(kombiniert)) return "Täglich möglich";
+    if (/centella|beruhig/.test(kombiniert)) return "Täglich";
+    return "Täglich";
   }
 
-  function productRow(p) {
-    var t = getAnwendungsTage(p.name);
-    var cells = "";
-    for (var i = 0; i < tage.length; i++) {
-      var d = tage[i];
-      if (t[d]) {
-        cells += '<td style="text-align:center;padding:10px 4px;border-bottom:1px solid #f1f5f9;font-size:16px;font-weight:600;color:#10b981;background:#f0fdf4;width:40px">&#10003;</td>';
-      } else {
-        cells += '<td style="text-align:center;padding:10px 4px;border-bottom:1px solid #f1f5f9;font-size:16px;font-weight:600;color:#cbd5e1;width:40px">&ndash;</td>';
-      }
-    }
-    return '<tr><td style="padding:14px;border-bottom:1px solid #f1f5f9;min-width:180px"><div style="font-size:13px;font-weight:600;font-family:Georgia,serif;color:#0f172a">' + p.name + '</div><div style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-top:2px">' + p.step + ' &middot; ' + p.brand + '</div></td>' + cells + '</tr>';
+  function getEffekt(p) {
+    if (!p.effekt) return null;
+    var first = p.effekt.split(".")[0];
+    return first.trim();
   }
 
-  function productCard(p) {
-    return '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px"><div style="font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700">' + p.step + '</div><div style="font-family:Georgia,serif;font-size:14px;font-weight:600;color:#0f172a;margin:2px 0 3px">' + p.name + '</div><div style="font-size:11px;color:#64748b">' + p.brand + ' &middot; ' + p.price + '</div><div style="margin-top:10px;padding-top:10px;border-top:1px dashed #cbd5e1"><div style="font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:4px">Anwendung</div><div style="font-size:12px;color:#475569;line-height:1.6">' + p.anwendung + '</div></div></div>';
+  function infoRow(label, value) {
+    if (!value) return "";
+    return '<tr>' +
+      '<td style="padding:6px 0;font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;vertical-align:top;width:110px;white-space:nowrap">' + label + '</td>' +
+      '<td style="padding:6px 0;font-size:12px;color:#0f172a;line-height:1.6;vertical-align:top">' + value + '</td>' +
+      '</tr>';
   }
 
-  var morningRows = routine.morning.map(productRow).join("");
-  var eveningRows = routine.evening.map(productRow).join("");
+  function productBlock(p) {
+    var highlight = /retinol|bha|salicyl|azelain/i.test((p.name || "") + " " + (p.step || ""));
+    var borderColor = highlight ? "#bfdbfe" : p.spf ? "#fde68a" : "#eef0f3";
+    var borderStyle = highlight ? "1.5px solid " + borderColor : "1px solid " + borderColor;
 
-  var seen = {};
-  var alleProdukte = [];
-  var allList = routine.morning.concat(routine.evening);
-  for (var j = 0; j < allList.length; j++) {
-    if (!seen[allList[j].name]) {
-      seen[allList[j].name] = true;
-      alleProdukte.push(allList[j]);
-    }
+    var html = '<div style="background:white;border:' + borderStyle + ';border-radius:14px;padding:18px;margin-bottom:10px;page-break-inside:avoid">';
+    html += '<div style="font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:3px">' + p.step + '</div>';
+    html += '<div style="font-family:Georgia,serif;font-size:16px;font-weight:500;color:#0f172a;line-height:1.3;letter-spacing:-0.01em">' + p.name + '</div>';
+    html += '<div style="font-size:11px;color:#64748b;margin-top:2px">' + p.brand + '</div>';
+
+    html += '<table style="width:100%;margin-top:14px;border-collapse:collapse;border-top:1px dashed #e2e8f0;padding-top:12px">';
+    html += '<tbody style="display:table-row-group">';
+    html += infoRow("Häufigkeit", getHaeufigkeit(p));
+    html += infoRow("Anwendung", p.anwendung);
+    html += infoRow("Erste Effekte", getEffekt(p));
+    html += '</tbody></table>';
+    html += '</div>';
+    return html;
   }
-  var detailCards = alleProdukte.map(productCard).join("");
+
+  var morningBlocks = routine.morning.map(productBlock).join("");
+  var eveningBlocks = routine.evening.map(productBlock).join("");
 
   var heute = new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
   var score = (skinData && skinData.score) ? skinData.score : 70;
   var concerns = (skinData && skinData.concerns) ? skinData.concerns.join(" &middot; ") : "";
   var summary = (skinData && skinData.summary) ? skinData.summary : "";
 
-  var thCells = "";
-  for (var k = 0; k < tage.length; k++) {
-    thCells += '<th style="padding:10px 6px;font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.1em;border-bottom:2px solid #e2e8f0;text-align:center;background:#f8fafc">' + tage[k] + '</th>';
-  }
+  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>skyn. Routine</title>';
+  html += '<style>@media print { body { background: white !important; } .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; } div { page-break-inside: avoid; } }</style>';
+  html += '</head>';
+  html += '<body style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:640px;margin:0 auto;padding:40px 24px;color:#0f172a;background:#f8fafc;line-height:1.5">';
 
-  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>skyn. Wochenplan</title></head>';
-  html += '<body style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:800px;margin:0 auto;padding:40px 24px;color:#0f172a;background:#f8fafc;line-height:1.5">';
   html += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;padding-bottom:20px;border-bottom:1px solid #e2e8f0">';
-  html += '<h1 style="font-family:Georgia,serif;font-size:36px;font-weight:500;letter-spacing:-0.02em;margin:0">skyn<span style="color:#3b82f6;font-style:italic">.</span></h1>';
-  html += '<div style="font-size:11px;color:#94a3b8;letter-spacing:0.1em">EVIDENZBASIERTE HAUTPFLEGE</div></div>';
-  html += '<div style="font-size:12px;color:#64748b;margin-bottom:8px">Erstellt am ' + heute + '</div>';
-  html += '<div style="background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);color:white;border-radius:18px;padding:24px;display:flex;justify-content:space-between;align-items:center;margin:24px 0">';
+  html += '<h1 style="font-family:Georgia,serif;font-size:32px;font-weight:500;letter-spacing:-0.02em;margin:0">skyn<span style="color:#3b82f6;font-style:italic">.</span></h1>';
+  html += '<div style="font-size:10px;color:#94a3b8;letter-spacing:0.1em;font-weight:600">EVIDENZBASIERT</div></div>';
+  html += '<div style="font-size:11px;color:#64748b;margin-bottom:8px">Erstellt am ' + heute + '</div>';
+
+  html += '<div class="hero" style="background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);color:white;border-radius:18px;padding:22px;display:flex;justify-content:space-between;align-items:center;margin:20px 0 24px">';
   html += '<div><div style="font-size:10px;opacity:0.7;letter-spacing:0.12em;margin-bottom:4px">DEIN HAUTTYP</div>';
-  html += '<div style="font-family:Georgia,serif;font-size:28px;font-weight:500">' + typeLabel + '</div>';
-  html += '<div style="font-size:12px;opacity:0.85;margin-top:6px">' + concerns + '</div>';
-  html += '<div style="font-size:11px;opacity:0.7;margin-top:10px">Budget: ' + budgetLabel + '</div></div>';
-  html += '<div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:500;font-family:Georgia,serif;border:1px solid rgba(255,255,255,0.25)">' + score + '</div>';
-  html += '<div style="font-size:10px;opacity:0.7;margin-top:6px">Score</div></div></div>';
+  html += '<div style="font-family:Georgia,serif;font-size:26px;font-weight:500;letter-spacing:-0.01em">' + typeLabel + '</div>';
+  html += '<div style="font-size:11px;opacity:0.85;margin-top:5px">' + concerns + '</div>';
+  html += '<div style="font-size:10px;opacity:0.7;margin-top:8px;letter-spacing:0.05em">Budget: ' + budgetLabel + '</div></div>';
+  html += '<div style="text-align:center"><div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:500;font-family:Georgia,serif;border:1px solid rgba(255,255,255,0.25)">' + score + '</div>';
+  html += '<div style="font-size:9px;opacity:0.7;margin-top:4px">Score</div></div></div>';
 
   if (summary) {
-    html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:20px;font-size:14px;color:#334155;line-height:1.7;margin-bottom:28px">';
-    html += '<h3 style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin:0 0 10px">Analyse</h3>' + summary + '</div>';
+    html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:18px;margin-bottom:28px">';
+    html += '<div style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:8px">Analyse</div>';
+    html += '<div style="font-size:13px;color:#334155;line-height:1.7">' + summary + '</div></div>';
   }
 
-  html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:24px;margin-bottom:20px">';
-  html += '<h2 style="font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 16px">Dein Wochenplan</h2>';
-  html += '<div style="font-size:12px;color:#64748b;margin-bottom:18px">Welches Produkt an welchem Tag &ndash; &#10003; bedeutet Anwendung, &ndash; bedeutet Pause.</div>';
-  html += '<table style="width:100%;border-collapse:separate;border-spacing:0;font-size:13px">';
-  html += '<thead><tr><th style="padding:10px 6px;font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.1em;border-bottom:2px solid #e2e8f0;text-align:left;padding-left:14px;background:#f8fafc">Produkt</th>' + thCells + '</tr></thead>';
-  html += '<tbody><tr><td colspan="8" style="padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:500;background:#f1f5f9">Morgens</td></tr>';
-  html += morningRows;
-  html += '<tr><td colspan="8" style="padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:500;background:#f1f5f9">Abends</td></tr>';
-  html += eveningRows;
-  html += '</tbody></table></div>';
+  html += '<div style="margin-bottom:28px">';
+  html += '<div style="font-family:Georgia,serif;font-size:22px;font-weight:500;color:#0f172a;letter-spacing:-0.02em;margin-bottom:4px">Morgens</div>';
+  html += '<div style="font-size:11px;color:#64748b;margin-bottom:14px">Deine tägliche Routine für den Start in den Tag</div>';
+  html += morningBlocks;
+  html += '</div>';
 
-  html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:24px;margin-bottom:20px">';
-  html += '<h2 style="font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 16px">Produkte im Detail</h2>';
-  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">' + detailCards + '</div>';
-  html += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px;margin-top:20px;font-size:12px;color:#78350f;line-height:1.7">';
-  html += '<strong>Wichtige Regeln:</strong><br>&middot; Retinol und BHA niemals am gleichen Abend anwenden.<br>&middot; SPF morgens ist bei Retinol-Anwendung Pflicht.<br>&middot; Bei R&ouml;tungen oder Brennen: Aktivstoff pausieren.<br>&middot; Neue Produkte erst am Unterarm testen.</div></div>';
+  html += '<div style="margin-bottom:28px">';
+  html += '<div style="font-family:Georgia,serif;font-size:22px;font-weight:500;color:#0f172a;letter-spacing:-0.02em;margin-bottom:4px">Abends</div>';
+  html += '<div style="font-size:11px;color:#64748b;margin-bottom:14px">Regeneration und Wirkstoffpflege vor dem Schlaf</div>';
+  html += eveningBlocks;
+  html += '</div>';
 
-  html += '<div style="font-size:10px;color:#94a3b8;line-height:1.7;margin-top:28px;padding-top:20px;border-top:1px solid #e2e8f0">';
-  html += '<strong>Disclaimer:</strong> Diese App ersetzt keine medizinische Beratung.<br><br>';
-  html += '<strong>Datenschutz:</strong> Dein Foto wurde nicht gespeichert. Links k&ouml;nnen Affiliate-Links sein &ndash; f&uuml;r dich entsteht kein Aufpreis.</div>';
+  html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:18px;margin-bottom:20px">';
+  html += '<div style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:10px">Wichtige Regeln</div>';
+  html += '<div style="font-size:12px;color:#475569;line-height:1.8">';
+  html += 'Retinol und BHA niemals am gleichen Abend.<br>';
+  html += 'SPF morgens ist bei Retinol-Anwendung Pflicht.<br>';
+  html += 'Bei R&ouml;tungen oder Brennen: Aktivstoff pausieren.<br>';
+  html += 'Neue Produkte erst am Unterarm testen.';
+  html += '</div></div>';
+
+  html += '<div style="font-size:10px;color:#94a3b8;line-height:1.7;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0">';
+  html += '<strong style="color:#64748b">Disclaimer:</strong> Diese App ersetzt keine medizinische Beratung.<br>';
+  html += '<strong style="color:#64748b">Datenschutz:</strong> Dein Foto wurde nicht gespeichert. Links k&ouml;nnen Affiliate-Links sein &ndash; f&uuml;r dich entsteht kein Aufpreis.';
+  html += '</div>';
   html += '</body></html>';
 
   try {
