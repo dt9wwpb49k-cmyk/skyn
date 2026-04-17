@@ -497,11 +497,14 @@ function ProductCard({ item, idx, personalReason }) {
 }
 
 function downloadWochenplan(skinData, skinType, budget, routine, regler) {
-  const typeLabel = skinType === "combination" ? "Mischhaut" : skinType === "dry" ? "Trockene Haut" : "Fettige Haut";
-  const budgetLabel = budget === "drogerie" ? "Drogerie" : budget === "midrange" ? "Mid-Range" : "Premium";
-  const tage = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-  const getAnwendungsTage = (produktName) => {
-    if (produktName === "Retinol") return { Mo: true, Di: false, Mi: true, Do: false, Fr: true, Sa: false, So: false };
+  var typeLabel = skinType === "combination" ? "Mischhaut" : skinType === "dry" ? "Trockene Haut" : "Fettige Haut";
+  var budgetLabel = budget === "drogerie" ? "Drogerie" : budget === "midrange" ? "Mid-Range" : "Premium";
+  var tage = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
+  function getAnwendungsTage(produktName) {
+    if (produktName === "Retinol") {
+      return { Mo: true, Di: false, Mi: true, Do: false, Fr: true, Sa: false, So: false };
+    }
     if (produktName === "BHA (Salicylsäure)") {
       if (routine.hauptaktiv === "Retinol" && routine.sekundaer === "BHA (Salicylsäure)") {
         return { Mo: false, Di: true, Mi: false, Do: true, Fr: false, Sa: true, So: false };
@@ -509,23 +512,103 @@ function downloadWochenplan(skinData, skinType, budget, routine, regler) {
       return { Mo: true, Di: false, Mi: true, Do: false, Fr: true, Sa: false, So: false };
     }
     return { Mo: true, Di: true, Mi: true, Do: true, Fr: true, Sa: true, So: true };
-  };
-  const buildProductRow = (p) => {
-    const t = getAnwendungsTage(p.name);
-    return `<tr><td class="prod-cell"><div class="prod-name">${p.name}</div><div class="prod-step">${p.step} · ${p.brand}</div></td>${tage.map(d => `<td class="day-cell ${t[d] ? "check" : "dash"}">${t[d] ? "✓" : "–"}</td>`).join("")}</tr>`;
-  };
-  const allMorning = routine.morning.map(buildProductRow).join("");
-  const allEvening = routine.evening.map(buildProductRow).join("");
-  const alleProdukte = [...routine.morning, ...routine.evening].filter((p, i, arr) => arr.findIndex(x => x.name === p.name) === i);
-  const productDetailCard = (p) => `<div class="detail-card"><div class="detail-header"><div><div class="detail-step">${p.step}</div><div class="detail-name">${p.name}</div><div class="detail-brand">${p.brand} · ${p.price}</div></div></div><div class="detail-body"><div class="detail-label">Anwendung</div><div class="detail-text">${p.anwendung}</div></div></div>`;
-  const html = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>skyn. Wochenplan – ${typeLabel}</title><style>*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:800px;margin:0 auto;padding:40px 24px;color:#0f172a;background:#f8fafc;line-height:1.5}h1{font-family:Georgia,serif;font-size:36px;font-weight:500;letter-spacing:-0.02em;margin:0}h1 .accent{color:#3b82f6;font-style:italic}h2{font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 16px}h3{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin:0 0 10px}.header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;padding-bottom:20px;border-bottom:1px solid #e2e8f0}.hero{background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);color:white;border-radius:18px;padding:24px;display:flex;justify-content:space-between;align-items:center;margin:24px 0}.hero-type{font-family:Georgia,serif;font-size:28px;font-weight:500}.score-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:500;font-family:Georgia,serif}.summary{background:white;border:1px solid #eef0f3;border-radius:14px;padding:20px;font-size:14px;color:#334155;line-height:1.7;margin-bottom:28px}.section{background:white;border:1px solid #eef0f3;border-radius:14px;padding:24px;margin-bottom:20px}.week-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}.week-table thead th{padding:10px 6px;font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.1em;border-bottom:2px solid #e2e8f0;text-align:center;background:#f8fafc}.week-table thead th:first-child{text-align:left;padding-left:14px}.week-table .time-row td{padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:500;background:#f1f5f9}.prod-cell{padding:14px;border-bottom:1px solid #f1f5f9;min-width:220px}.prod-name{font-size:13px;font-weight:600;font-family:Georgia,serif}.prod-step{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-top:2px}.day-cell{text-align:center;padding:10px 4px;border-bottom:1px solid #f1f5f9;font-size:16px;font-weight:600;width:40px}.day-cell.check{color:#10b981;background:#f0fdf4}.day-cell.dash{color:#cbd5e1}.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.detail-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px}.detail-step{font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700}.detail-name{font-family:Georgia,serif;font-size:14px;font-weight:600;margin:2px 0 3px}.detail-brand{font-size:11px;color:#64748b}.detail-body{margin-top:10px;padding-top:10px;border-top:1px dashed #cbd5e1}.detail-label{font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:4px}.detail-text{font-size:12px;color:#475569;line-height:1.6}.rules{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px;margin-top:20px;font-size:12px;color:#78350f;line-height:1.7}.disc{font-size:10px;color:#94a3b8;line-height:1.7;margin-top:28px;padding-top:20px;border-top:1px solid #e2e8f0}@media print{body{background:white}.day-cell.check{print-color-adjust:exact;-webkit-print-color-adjust:exact}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}}</style></head><body><div class="header"><h1>skyn<span class="accent">.</span></h1><div style="font-size:11px;color:#94a3b8;letter-spacing:0.1em">EVIDENZBASIERTE HAUTPFLEGE</div></div><div style="font-size:12px;color:#64748b;margin-bottom:8px">Erstellt am ${new Date().toLocaleDateString("de-DE",{day:"2-digit",month:"long",year:"numeric"})}</div><div class="hero"><div><div style="font-size:10px;opacity:0.7;letter-spacing:0.12em;margin-bottom:4px">DEIN HAUTTYP</div><div class="hero-type">${typeLabel}</div><div style="font-size:12px;opacity:0.85;margin-top:6px">${(skinData?.concerns||[]).join(" · ")}</div><div style="font-size:11px;opacity:0.7;margin-top:10px">Budget: ${budgetLabel}</div></div><div style="text-align:center"><div class="score-circle">${skinData?.score||70}</div><div style="font-size:10px;opacity:0.7;margin-top:6px">Score</div></div></div>${skinData?.summary?`<div class="summary"><h3>Analyse</h3>${skinData.summary}</div>`:""}<div class="section"><h2>Dein Wochenplan</h2><div style="font-size:12px;color:#64748b;margin-bottom:18px">Welches Produkt an welchem Tag – ✓ bedeutet Anwendung, – bedeutet Pause.</div><table class="week-table"><thead><tr><th>Produkt</th>${tage.map(t=>`<th>${t}</th>`).join("")}</tr></thead><tbody><tr class="time-row"><td colspan="8">☀ Morgens</td></tr>${allMorning}<tr class="time-row"><td colspan="8">☾ Abends</td></tr>${allEvening}</tbody></table></div><div class="section"><h2>Produkte im Detail</h2><div class="detail-grid">${alleProdukte.map(productDetailCard).join("")}</div><div class="rules"><strong>Wichtige Regeln:</strong><br>· Retinol und BHA niemals am gleichen Abend anwenden.<br>· SPF morgens ist bei Retinol-Anwendung Pflicht.<br>· Bei Rötungen oder Brennen: Aktivstoff pausieren.<br>· Neue Produkte erst am Unterarm testen.</div></div><div class="disc"><strong>Disclaimer:</strong> Diese App ersetzt keine medizinische Beratung.<br><br><strong>Datenschutz:</strong> Dein Foto wurde nicht gespeichert. Links können Affiliate-Links sein – für dich entsteht kein Aufpreis.</div></body></html>`;
-  const blob = new Blob([html], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "skyn-wochenplan.html";
-  a.click();
-  URL.revokeObjectURL(url);
+  }
+
+  function productRow(p) {
+    var t = getAnwendungsTage(p.name);
+    var cells = "";
+    for (var i = 0; i < tage.length; i++) {
+      var d = tage[i];
+      if (t[d]) {
+        cells += '<td style="text-align:center;padding:10px 4px;border-bottom:1px solid #f1f5f9;font-size:16px;font-weight:600;color:#10b981;background:#f0fdf4;width:40px">&#10003;</td>';
+      } else {
+        cells += '<td style="text-align:center;padding:10px 4px;border-bottom:1px solid #f1f5f9;font-size:16px;font-weight:600;color:#cbd5e1;width:40px">&ndash;</td>';
+      }
+    }
+    return '<tr><td style="padding:14px;border-bottom:1px solid #f1f5f9;min-width:180px"><div style="font-size:13px;font-weight:600;font-family:Georgia,serif;color:#0f172a">' + p.name + '</div><div style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-top:2px">' + p.step + ' &middot; ' + p.brand + '</div></td>' + cells + '</tr>';
+  }
+
+  function productCard(p) {
+    return '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px"><div style="font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700">' + p.step + '</div><div style="font-family:Georgia,serif;font-size:14px;font-weight:600;color:#0f172a;margin:2px 0 3px">' + p.name + '</div><div style="font-size:11px;color:#64748b">' + p.brand + ' &middot; ' + p.price + '</div><div style="margin-top:10px;padding-top:10px;border-top:1px dashed #cbd5e1"><div style="font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:4px">Anwendung</div><div style="font-size:12px;color:#475569;line-height:1.6">' + p.anwendung + '</div></div></div>';
+  }
+
+  var morningRows = routine.morning.map(productRow).join("");
+  var eveningRows = routine.evening.map(productRow).join("");
+
+  var seen = {};
+  var alleProdukte = [];
+  var allList = routine.morning.concat(routine.evening);
+  for (var j = 0; j < allList.length; j++) {
+    if (!seen[allList[j].name]) {
+      seen[allList[j].name] = true;
+      alleProdukte.push(allList[j]);
+    }
+  }
+  var detailCards = alleProdukte.map(productCard).join("");
+
+  var heute = new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+  var score = (skinData && skinData.score) ? skinData.score : 70;
+  var concerns = (skinData && skinData.concerns) ? skinData.concerns.join(" &middot; ") : "";
+  var summary = (skinData && skinData.summary) ? skinData.summary : "";
+
+  var thCells = "";
+  for (var k = 0; k < tage.length; k++) {
+    thCells += '<th style="padding:10px 6px;font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.1em;border-bottom:2px solid #e2e8f0;text-align:center;background:#f8fafc">' + tage[k] + '</th>';
+  }
+
+  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>skyn. Wochenplan</title></head>';
+  html += '<body style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:800px;margin:0 auto;padding:40px 24px;color:#0f172a;background:#f8fafc;line-height:1.5">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;padding-bottom:20px;border-bottom:1px solid #e2e8f0">';
+  html += '<h1 style="font-family:Georgia,serif;font-size:36px;font-weight:500;letter-spacing:-0.02em;margin:0">skyn<span style="color:#3b82f6;font-style:italic">.</span></h1>';
+  html += '<div style="font-size:11px;color:#94a3b8;letter-spacing:0.1em">EVIDENZBASIERTE HAUTPFLEGE</div></div>';
+  html += '<div style="font-size:12px;color:#64748b;margin-bottom:8px">Erstellt am ' + heute + '</div>';
+  html += '<div style="background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);color:white;border-radius:18px;padding:24px;display:flex;justify-content:space-between;align-items:center;margin:24px 0">';
+  html += '<div><div style="font-size:10px;opacity:0.7;letter-spacing:0.12em;margin-bottom:4px">DEIN HAUTTYP</div>';
+  html += '<div style="font-family:Georgia,serif;font-size:28px;font-weight:500">' + typeLabel + '</div>';
+  html += '<div style="font-size:12px;opacity:0.85;margin-top:6px">' + concerns + '</div>';
+  html += '<div style="font-size:11px;opacity:0.7;margin-top:10px">Budget: ' + budgetLabel + '</div></div>';
+  html += '<div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:500;font-family:Georgia,serif;border:1px solid rgba(255,255,255,0.25)">' + score + '</div>';
+  html += '<div style="font-size:10px;opacity:0.7;margin-top:6px">Score</div></div></div>';
+
+  if (summary) {
+    html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:20px;font-size:14px;color:#334155;line-height:1.7;margin-bottom:28px">';
+    html += '<h3 style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin:0 0 10px">Analyse</h3>' + summary + '</div>';
+  }
+
+  html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:24px;margin-bottom:20px">';
+  html += '<h2 style="font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 16px">Dein Wochenplan</h2>';
+  html += '<div style="font-size:12px;color:#64748b;margin-bottom:18px">Welches Produkt an welchem Tag &ndash; &#10003; bedeutet Anwendung, &ndash; bedeutet Pause.</div>';
+  html += '<table style="width:100%;border-collapse:separate;border-spacing:0;font-size:13px">';
+  html += '<thead><tr><th style="padding:10px 6px;font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.1em;border-bottom:2px solid #e2e8f0;text-align:left;padding-left:14px;background:#f8fafc">Produkt</th>' + thCells + '</tr></thead>';
+  html += '<tbody><tr><td colspan="8" style="padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:500;background:#f1f5f9">Morgens</td></tr>';
+  html += morningRows;
+  html += '<tr><td colspan="8" style="padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:500;background:#f1f5f9">Abends</td></tr>';
+  html += eveningRows;
+  html += '</tbody></table></div>';
+
+  html += '<div style="background:white;border:1px solid #eef0f3;border-radius:14px;padding:24px;margin-bottom:20px">';
+  html += '<h2 style="font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 16px">Produkte im Detail</h2>';
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">' + detailCards + '</div>';
+  html += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px;margin-top:20px;font-size:12px;color:#78350f;line-height:1.7">';
+  html += '<strong>Wichtige Regeln:</strong><br>&middot; Retinol und BHA niemals am gleichen Abend anwenden.<br>&middot; SPF morgens ist bei Retinol-Anwendung Pflicht.<br>&middot; Bei R&ouml;tungen oder Brennen: Aktivstoff pausieren.<br>&middot; Neue Produkte erst am Unterarm testen.</div></div>';
+
+  html += '<div style="font-size:10px;color:#94a3b8;line-height:1.7;margin-top:28px;padding-top:20px;border-top:1px solid #e2e8f0">';
+  html += '<strong>Disclaimer:</strong> Diese App ersetzt keine medizinische Beratung.<br><br>';
+  html += '<strong>Datenschutz:</strong> Dein Foto wurde nicht gespeichert. Links k&ouml;nnen Affiliate-Links sein &ndash; f&uuml;r dich entsteht kein Aufpreis.</div>';
+  html += '</body></html>';
+
+  try {
+    var blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var w = window.open(url, "_blank");
+    if (!w) {
+      window.location.href = url;
+    }
+    setTimeout(function() { URL.revokeObjectURL(url); }, 60000);
+  } catch (err) {
+    console.error("[skyn] Download fehlgeschlagen:", err);
+    alert("Plan konnte nicht geöffnet werden: " + (err && err.message ? err.message : "unbekannter Fehler"));
+  }
 }
 
 export default function App() {
